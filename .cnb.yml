@@ -13,7 +13,7 @@
 $:
   vscode:
     - runner:
-        cpus: 32
+        cpus: 16
     - docker:
         # 指定开发环境镜像，可以是任意可访问的镜像。
         # 如果 image 指定的镜像中已安装 code-server 代码服务，将使用单容器模式启动开发环境
@@ -54,10 +54,7 @@ $:
         - name: build knowledge base
           image: cnbcool/knowledge-base
           settings:
-            include:
-              - /*.md
-              - docs/*.md
-              - docs/*.txt
+            include: '**/*.md,**/*.mdx,**/*.pdf,**/*.docx,**/*.txt'            
             issue_sync_enabled: true
             issue_labels:
               - bug
