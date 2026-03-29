@@ -1,0 +1,32 @@
+avwq_dev:
+  vscode:
+    - runner:
+        cpus: 32
+      services:
+        - docker
+  push:
+    - *build
+    - ifModify:
+        - "*.md"
+        - "docs/*.md"
+        - "docs/*.txt"
+      stages:
+        - name: build knowledge base
+          image: cnbcool/knowledge-base
+          settings:
+            include:
+              - docs/*.md
+              - docs/*.txt
+    - stages:
+        - name: build knowledge base
+          image: cnbcool/knowledge-base
+          settings:
+            include:
+              - docs/*.md
+              - docs/*.txt            
+            issue_sync_enabled: true
+            issue_labels:
+              - bug
+              - feature
+            issue_state: "open"
+            issue_priority: "P0,P1"
